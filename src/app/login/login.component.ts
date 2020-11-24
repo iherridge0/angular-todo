@@ -19,10 +19,11 @@ export class LoginComponent implements OnInit {
   }
 
   handleLogin() {
-    if (this.username === 'irwin') {
-      this.router.navigate(['welcome']);
+    if (this.username === '') {
       this.invalidLogin = true;
-    } else
+    } else {
       this.invalidLogin = false;
+      this.router.navigate(['welcome/', this.username]);
+    }
   }
 }
