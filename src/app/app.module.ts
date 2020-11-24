@@ -8,6 +8,7 @@ import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { ErrorComponent } from './error/error.component';
+import { ListTodosComponent } from './list-todos/list-todos.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ErrorComponent } from './error/error.component';
     WelcomeComponent,
     FooterComponent,
     LoginComponent,
-    ErrorComponent
+    ErrorComponent,
+    ListTodosComponent
   ],
   imports: [
     BrowserModule,
