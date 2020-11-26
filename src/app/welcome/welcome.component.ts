@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { HelloWorldBean, WelcomeDataService } from '../service/data/welcome-data.service';
 
 @Component({
   selector: 'app-welcome',
@@ -9,11 +10,31 @@ import { ActivatedRoute } from '@angular/router';
 export class WelcomeComponent implements OnInit {
 
   name: string = ''
+  welcomeMessageFromService: string = '';
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(
+    private route: ActivatedRoute,
+    private welcomeDataService: WelcomeDataService
+  ) { }
 
   ngOnInit(): void {
     this.name = this.route.snapshot.params['name'];
+  }
+
+  getWelcomeMessage() {
+    //Creates an observable
+    //console.log(this.welcomeDataService.executeHelloWorldBeanService());
+
+    //asyncronous call
+    //- what should we do when we get the response back?
+    this.welcomeDataService.executeHelloWorldBeanService().subscribe(
+      //Whenever a response comes back, do this:
+      response => this.handleSuccessfulResponse(response)
+    );
+  }
+
+  handleSuccessfulResponse(response: HelloWorldBean) {
+    this.welcomeMessageFromService = response.message;
   }
 
 }
