@@ -27,14 +27,21 @@ export class WelcomeComponent implements OnInit {
 
     //asyncronous call
     //- what should we do when we get the response back?
-    this.welcomeDataService.executeHelloWorldBeanService().subscribe(
+    this.welcomeDataService.executeHelloWorldBeanWithPathVariable(this.name).subscribe(
       //Whenever a response comes back, do this:
-      response => this.handleSuccessfulResponse(response)
+      response => this.handleSuccessfulResponse(response),
+      error => this.handleErrorResonse(error)
     );
   }
 
   handleSuccessfulResponse(response: HelloWorldBean) {
     this.welcomeMessageFromService = response.message;
+  }
+
+  handleErrorResonse(error: any) {
+    //message is in error.message
+    this.welcomeMessageFromService = error.error.message;
+
   }
 
 }

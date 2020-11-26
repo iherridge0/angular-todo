@@ -17,6 +17,12 @@ export class WelcomeDataService {
 
   executeHelloWorldBeanService() {
     //using generics<> the response would get mapped back to the HelloWorldBean using the constructor with message variable
-    return this.http.get<HelloWorldBean>("http://localhost:8080/hello-world-bean");
+    return this.http.get<HelloWorldBean>('http://localhost:8080/hello-world-bean');
   }
+
+  executeHelloWorldBeanWithPathVariable(name: string) {
+
+    return this.http.get<HelloWorldBean>(`http://localhost:8080/hello-world/path-variable/${name}`);
+  }
+
 }
