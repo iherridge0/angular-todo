@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TodoDataService } from '../service/data/todo-data.service';
+import { HardcodedAuthenticationService } from '../service/hardcoded-authentication.service';
 
 export class Todo {
   constructor(
@@ -6,11 +8,8 @@ export class Todo {
     public description: string,
     public done: boolean,
     public targetDate: Date
-  ) {
-
-  }
+  ) { }
 }
-
 
 @Component({
   selector: 'app-list-todos',
@@ -18,16 +17,27 @@ export class Todo {
   styleUrls: ['./list-todos.component.css']
 })
 export class ListTodosComponent implements OnInit {
-  todos = [
-    new Todo(1, 'Become an Expert at AngularJS', false, new Date()),
-    new Todo(2, 'Become an Expert at Angular', false, new Date()),
-    new Todo(3, 'Become an Expert at Spring Boot', false, new Date()),
-    new Todo(4, 'Become an Expert at Spring JPA & Hibernate', false, new Date())
-  ]
 
-  constructor() { }
+  errorMessage: string = '';
+  username: string = '';
+  todos: Todo[] = [];
+
+
+  constructor(
+    private todoDataService: TodoDataService,
+    private authenticationService: HardcodedAuthenticationService
+  ) { }
 
   ngOnInit(): void {
+
+    this.username = this.authenticationService.getAuthenticatedUser();
+    this.todoDataService.getAllTodos(this.username).subscribe(
+      response => {
+        console.log(response);
+        this.todos = response;
+      }
+    );
   }
+
 
 }
