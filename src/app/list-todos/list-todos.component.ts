@@ -18,7 +18,7 @@ export class Todo {
 })
 export class ListTodosComponent implements OnInit {
 
-  errorMessage: string = '';
+  message: string = '';
   username: string = '';
   todos: Todo[] = [];
 
@@ -30,6 +30,23 @@ export class ListTodosComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.refreshTodos();
+  }
+
+  deleteTodo(id: number) {
+    this.todoDataService.deleteTodo(this.username, id).subscribe(
+      response => {
+        console.log(response)
+        this.message = `Todo item of ${id} deleted`
+        setTimeout(() => {
+          console.log('sleep');
+          this.message = '';
+        }, 5000);
+      }
+    );
+  }
+
+  refreshTodos() {
     this.username = this.authenticationService.getAuthenticatedUser();
     this.todoDataService.getAllTodos(this.username).subscribe(
       response => {
@@ -39,5 +56,7 @@ export class ListTodosComponent implements OnInit {
     );
   }
 
-
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
 }
