@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TodoDataService } from '../service/data/todo-data.service';
 import { HardcodedAuthenticationService } from '../service/hardcoded-authentication.service';
 
@@ -8,7 +9,7 @@ export class Todo {
     public description: string,
     public done: boolean,
     public targetDate: Date
-  ) { }
+  ) { };
 }
 
 @Component({
@@ -24,6 +25,7 @@ export class ListTodosComponent implements OnInit {
 
 
   constructor(
+    private router: Router,
     private todoDataService: TodoDataService,
     private authenticationService: HardcodedAuthenticationService
   ) { }
@@ -41,9 +43,16 @@ export class ListTodosComponent implements OnInit {
         setTimeout(() => {
           console.log('sleep');
           this.message = '';
+          this.refreshTodos();
         }, 5000);
+
       }
     );
+
+  }
+
+  updateTodo(id: number) {
+    this.router.navigate(['todos/', id]);
   }
 
   refreshTodos() {
@@ -57,6 +66,6 @@ export class ListTodosComponent implements OnInit {
   }
 
   delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 }
