@@ -1,8 +1,7 @@
-<h1>My Todo's</h1>
 <div class="container">
+    <h1>My Todo's</h1>
     <div class="alert alert-success" *ngIf="message">{{message}}</div>
     <table class="table">
-        <caption>My Todo's</caption>
         <thead>
             <tr>
                 <th>description</th>
@@ -23,4 +22,7 @@
         </tbody>
 
     </table>
+    <div class="row">
+        <button (click)="createTodo()" class="btn btn-success">Add</button>
+    </div>
 </div>

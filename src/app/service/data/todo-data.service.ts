@@ -28,4 +28,8 @@ export class TodoDataService {
   saveTodo(username: string, todo: Todo) {
     return this.http.put(`http://localhost:8080/users/${username}/todos/${todo.id}`, todo);
   }
+
+  createTodo(username: string, todo: Todo) {
+    return this.http.post(`http://localhost:8080/users/${username}/todos/${todo.id}`, todo);
+  }
 }

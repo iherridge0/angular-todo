@@ -44,7 +44,7 @@ export class ListTodosComponent implements OnInit {
           console.log('sleep');
           this.message = '';
           this.refreshTodos();
-        }, 5000);
+        }, 2000);
 
       }
     );
@@ -53,6 +53,10 @@ export class ListTodosComponent implements OnInit {
 
   updateTodo(id: number) {
     this.router.navigate(['todos/', id]);
+  }
+
+  createTodo() {
+    this.router.navigate(['todos/', -1]);
   }
 
   refreshTodos() {

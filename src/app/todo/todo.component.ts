@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TodoDataService } from '../service/data/todo-data.service';
 import { HardcodedAuthenticationService } from '../service/hardcoded-authentication.service';
 import { Todo } from '../list-todos/list-todos.component';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-todo',
@@ -10,7 +11,7 @@ import { Todo } from '../list-todos/list-todos.component';
   styleUrls: ['./todo.component.css']
 })
 export class TodoComponent implements OnInit {
-  todo: any;
+  todo: Todo = new Todo(0, '', false, new Date());
   username = '';
   id = 0;
   constructor(
@@ -24,22 +25,33 @@ export class TodoComponent implements OnInit {
 
   ngOnInit(): void {
     this.username = this.authenticationService.getAuthenticatedUser();
-    this.id = this.route.snapshot.params['id'];
-    this.todoDataService.retrieveTodo(this.username, this.id).subscribe(
-      response => {
-        console.log(response);
-        this.todo = response;
-      }
-    );
+    this.todo.id = this.route.snapshot.params['id'];
+    if (this.todo.id != -1) {
+      this.todoDataService.retrieveTodo(this.username, this.todo.id).subscribe(
+        response => {
+          console.log(response);
+          this.todo = response;
+        }
+      );
+    }
   }
 
   saveTodo() {
-    this.todoDataService.saveTodo(this.username, this.todo).subscribe(
-      response => {
-        console.log(response);
-      }
-    );
+    if (this.todo.id === -1) {
+      //Create Todo
+      this.todoDataService.createTodo(this.username, this.todo).subscribe(
+        response => {
+          console.log(response);
+        }
+      );
+    } else {
+      //Update Todo
+      this.todoDataService.saveTodo(this.username, this.todo).subscribe(
+        response => {
+          console.log(response);
+        }
+      );
+    }
     this.router.navigate(['todos/']);
   }
-
 }
