@@ -1,19 +1,19 @@
 <div class="container">
     <h1>Login!</h1>
+    <form (ngSubmit)="handleLogin()">
+        <div class="alert alert-warning" *ngIf='invalidLogin'>{{errorMessage}}</div>
 
-    <div class="alert alert-warning" *ngIf='invalidLogin'>{{errorMessage}}</div>
-    <div class="login">
-        <div>
-            <label for="username">Username:</label><br>
-            <input type="text" id="username" [(ngModel)]="username">
+        <div class="login">
+            <div>
+                <label for="username">Username:</label><br>
+                <input type="text" id="username" [(ngModel)]="username" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div>
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success">Login</button>
         </div>
-        <div>
-            <label for="password">Password:</label><br>
-            <input type="password" id="password" [(ngModel)]="password">
-        </div>
-        <br>
-        <button (click)="handleLogin()" class="btn btn-success">Login</button>
-
-
-    </div>
+    </form>
 </div>
