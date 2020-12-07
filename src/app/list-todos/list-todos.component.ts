@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { BasicAuthenticationService } from '../service/basic-authentication.service';
 import { TodoDataService } from '../service/data/todo-data.service';
 import { HardcodedAuthenticationService } from '../service/hardcoded-authentication.service';
 
@@ -27,7 +28,7 @@ export class ListTodosComponent implements OnInit {
   constructor(
     private router: Router,
     private todoDataService: TodoDataService,
-    private authenticationService: HardcodedAuthenticationService
+    private basicAuthenticationService: BasicAuthenticationService
   ) { }
 
   ngOnInit(): void {
@@ -60,7 +61,7 @@ export class ListTodosComponent implements OnInit {
   }
 
   refreshTodos() {
-    this.username = this.authenticationService.getAuthenticatedUser();
+    this.username = this.basicAuthenticationService.getAuthenticatedUser();
     this.todoDataService.getAllTodos(this.username).subscribe(
       response => {
         console.log(response);

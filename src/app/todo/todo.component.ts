@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TodoDataService } from '../service/data/todo-data.service';
-import { HardcodedAuthenticationService } from '../service/hardcoded-authentication.service';
 import { Todo } from '../list-todos/list-todos.component';
-import { ThrowStmt } from '@angular/compiler';
+import { BasicAuthenticationService } from '../service/basic-authentication.service';
 
 @Component({
   selector: 'app-todo',
@@ -18,13 +17,13 @@ export class TodoComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private todoDataService: TodoDataService,
-    private authenticationService: HardcodedAuthenticationService
+    private basicAuthenticationService: BasicAuthenticationService
   ) {
 
   }
 
   ngOnInit(): void {
-    this.username = this.authenticationService.getAuthenticatedUser();
+    this.username = this.basicAuthenticationService.getAuthenticatedUser();
     this.todo.id = this.route.snapshot.params['id'];
     if (this.todo.id != -1) {
       this.todoDataService.retrieveTodo(this.username, this.todo.id).subscribe(
