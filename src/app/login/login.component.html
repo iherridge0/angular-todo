@@ -1,6 +1,6 @@
 <div class="container">
     <h1>Login!</h1>
-    <form (ngSubmit)="handleBasicAuthLogin()">
+    <form (ngSubmit)="handleJWTAuthLogin()">
         <div class="alert alert-warning" *ngIf='invalidLogin'>{{errorMessage}}</div>
 
         <div class="login">
