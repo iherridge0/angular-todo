@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
+import * as bcrypt from 'bcryptjs';
 //import { HardcodedAuthenticationService } from '../service/hardcoded-authentication.service';
 
 @Component({
@@ -10,8 +11,8 @@ import { BasicAuthenticationService } from '../service/basic-authentication.serv
 })
 export class LoginComponent implements OnInit {
 
-  username = 'in28minutes';
-  password = 'dummy';
+  username = '';
+  password = '';
   errorMessage = 'Invalid Login';
   invalidLogin = false;
 
@@ -22,6 +23,10 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+  }
+
+  register() {
+    this.router.navigate(['user/']);
   }
 
   // handleLogin() {
@@ -37,7 +42,6 @@ export class LoginComponent implements OnInit {
     this.basicAuthenticationService.executeAuthenticationService(this.username, this.password).subscribe(
       data => {
         console.log(data);
-        console.log(this.username);
         this.router.navigate(['welcome/', this.username]);
         this.invalidLogin = false;
       },
@@ -49,10 +53,13 @@ export class LoginComponent implements OnInit {
   }
 
   handleJWTAuthLogin() {
-    this.basicAuthenticationService.executeJWTAuthenticationService(this.username, this.password).subscribe(
+    let encryptedPassword = window.btoa(`${this.username}:${this.password}`);
+    // const salt = bcrypt.genSaltSync(10);
+    // encryptedPassword = bcrypt.hashSync(this.password, 10);
+    console.log(encryptedPassword);
+    this.basicAuthenticationService.executeJWTAuthenticationService(this.username, encryptedPassword).subscribe(
       data => {
         console.log(data);
-        console.log(this.username);
         this.router.navigate(['welcome/', this.username]);
         this.invalidLogin = false;
       },

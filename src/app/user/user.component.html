@@ -1,7 +1,6 @@
 <div class="container">
-    <h1>Login!</h1>
-    <form (ngSubmit)="handleJWTAuthLogin()">
-        <div class="alert alert-warning" *ngIf='invalidLogin'>{{errorMessage}}</div>
+    <h1>Register!</h1>
+    <form (ngSubmit)="saveUser()">
 
         <div class="login">
             <div>
@@ -13,11 +12,7 @@
                 <input type="password" id="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
             </div>
             <br>
-            <button type="submit" class="btn btn-success">Login</button>
-
+            <button type="submit" class="btn btn-success">Save</button>
         </div>
-
     </form>
-    <br>
-    <button class="btn btn-success" (click)="register()">Register</button>
 </div>
