@@ -41,6 +41,7 @@ export class TodoComponent implements OnInit {
       this.todoDataService.createTodo(this.username, this.todo).subscribe(
         response => {
           console.log(response);
+          this.router.navigate(['todos/']);
         }
       );
     } else {
@@ -48,9 +49,10 @@ export class TodoComponent implements OnInit {
       this.todoDataService.saveTodo(this.username, this.todo).subscribe(
         response => {
           console.log(response);
+          this.router.navigate(['todos/']);
         }
       );
     }
-    this.router.navigate(['todos/']);
+
   }
 }

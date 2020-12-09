@@ -32,7 +32,6 @@ export class ListTodosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this.refreshTodos();
   }
 
@@ -42,7 +41,6 @@ export class ListTodosComponent implements OnInit {
         console.log(response)
         this.message = `Todo item of ${id} deleted`
         setTimeout(() => {
-          console.log('sleep');
           this.message = '';
           this.refreshTodos();
         }, 2000);

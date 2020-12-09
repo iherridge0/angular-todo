@@ -27,7 +27,7 @@ export class UserComponent implements OnInit {
 
     // const salt = bcrypt.genSaltSync(10);
     // encryptedPassword = bcrypt.hashSync(this.password, 10);
-    console.log(encryptedPassword);
+    //console.log(encryptedPassword);
     this.userDataService.saveUser(new User(this.username, encryptedPassword)).subscribe(
       data => {
         console.log(data);

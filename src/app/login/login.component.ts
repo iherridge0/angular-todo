@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
     let encryptedPassword = window.btoa(`${this.username}:${this.password}`);
     // const salt = bcrypt.genSaltSync(10);
     // encryptedPassword = bcrypt.hashSync(this.password, 10);
-    console.log(encryptedPassword);
+    //console.log(encryptedPassword);
     this.basicAuthenticationService.executeJWTAuthenticationService(this.username, encryptedPassword).subscribe(
       data => {
         console.log(data);
