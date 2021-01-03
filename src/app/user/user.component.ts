@@ -12,6 +12,7 @@ export class UserComponent implements OnInit {
 
   username = '';
   password = '';
+  errorMessage = '';
 
   constructor(
     private router: Router,
@@ -32,11 +33,26 @@ export class UserComponent implements OnInit {
       data => {
         console.log(data);
         this.router.navigate(['/']);
+        this.errorMessage = '';
       },
       error => {
+        if(error.status == -1){
+          this.errorMessage = 'The backend is currently down, please try again later';
+        } else if(error.status == 409) {
+          this.errorMessage = this.username + ' already exist, please try a different username.';
+        } else {
+          //Validation errors
+          this.errorMessage = 'Check your validations';
+        }
+          
         console.log(error);
+        
       }
     );
+  }
+
+  back(){
+    this.router.navigate(['/login']);
   }
 
 }

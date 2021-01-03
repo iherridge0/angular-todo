@@ -1,23 +1,22 @@
-<div class="container">
-    <h1>Login!</h1>
+<main class="form-login">
     <form (ngSubmit)="handleJWTAuthLogin()">
+        <h1 class="h3 mb-3 fw-normal">Please log in</h1>
         <div class="alert alert-warning" *ngIf='invalidLogin'>{{errorMessage}}</div>
 
         <div class="login">
             <div>
-                <label for="username">Username:</label><br>
-                <input type="text" id="username" [(ngModel)]="username" [ngModelOptions]="{standalone: true}">
+                <input type="text" id="username" class="form-control"
+                placeholder="Enter your unique username" [(ngModel)]="username" [ngModelOptions]="{standalone: true}" required autofocus>
             </div>
             <div>
-                <label for="password">Password:</label><br>
-                <input type="password" id="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+                <input type="password" id="password" [(ngModel)]="password" class="form-control" 
+                placeholder="Enter your password" [ngModelOptions]="{standalone: true}" required>
             </div>
             <br>
-            <button type="submit" class="btn btn-success">Login</button>
+            <button id="login" type="submit" class="w-100 btn btn-lg btn-info">Login</button>
 
         </div>
 
     </form>
-    <br>
-    <button class="btn btn-success" (click)="register()">Register</button>
-</div>
+    <button class="w-100 btn btn-lg btn-dark" (click)="register()">Register</button>
+</main>
